@@ -1,0 +1,32 @@
+--構造体xyz（struct xyz型の内容を定義）--
+struct xyz {
+  int    x;
+  long   y;
+  double z;
+};
+--struct xyz型aの定義--
+struct xyz a;
+--aを指すポインタ--
+struct xyz *p = &a;
+
+構造体オブジェクト内のメンバにアクセス；
+　ドット演算子（.）
+構造体オプジェクトへのポインタからメンバにアクセス：
+　アロー演算子（->）
+
+struct xyz型　は長いので
+typedef struct xyz XYZ;
+「XYZ型」として表せる。
+
+--XYZ型（=struct xyz型）のa--
+XYZ a;
+--aを指すXYZ *型（=struct xyz *型）のポインタp--
+XYZ *p = &a;
+
+
+typedef struct xyz XYZ;
+の「struct xyz」を
+struct {
+  ---
+}
+に置き換えて、定義とtypedef宣言をまとめてできる
