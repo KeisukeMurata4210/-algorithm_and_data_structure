@@ -2,6 +2,28 @@
 # include <stdio.h>
 # include <stdlib.h>
 
+/* 整数を比較する関数（昇順用） */
+int int_cmp(const int *a, const int *b)
+{
+  if (*a < *b)
+    return -1;
+  else if (*a > *b)
+    return 1;
+  else
+    return 0;
+}
+/* 引数void *型の関数、へのキャストを避けるならこう書く */
+/* 
+int int_cmp(const void *a, const void *b)
+{
+  if (*(int *)a < *(int *)b)
+    return -1;
+  else if (*(int *)a > *(int *)b)
+    return 1;
+  else
+    return 0;
+}
+ */
 
 int main(void)
 {
@@ -28,8 +50,14 @@ int main(void)
               x,
               nx,
               sizeof(int),
-              (int (*)(const void * , const void *))int_cmp
+              (int (*)(const void * , const void *))int_cmp /* bseach()の引数が受け取る関数ポインタは、引数がvoid * */
               );
+  if (p == NULL)
+    puts("探索に失敗しました。");
+  else
+    printf("%dはx[%d]にあります。\n", ky, (int)(p - x));/* ポインタ同士の引き算は、アドレスを引いた後要素型のバイト数（intなら4）で割る */
+  free(x);
+  return 0;
 }
 
 
