@@ -14,7 +14,7 @@ typedef struct __node {
 typedef struct {
   Node *head; /* 先頭ノードへのポインタ */
   Node *crnt; /* 着目ノードへのポインタ */
-} List;
+} List;/* Listは先頭と現在位置を記録しておくだけ。実データにアクセスするときはListを経由する */
 
 /* 線形リストを初期化 */
 void Initialize(List *list);

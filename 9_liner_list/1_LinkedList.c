@@ -23,3 +23,24 @@ void Initialize(List *list)
   list->head = NULL;/* 先頭ノード */
   list->crnt = NULL;/* 着目ノード */
 }
+
+/* 関数compareによってxと一致すると判定されるノードを探索 */
+Node *Search(List *list, const Member *x, 
+                          int compare(const Member *x, const Member *y))
+{
+  Node *ptr = list->head;
+  while (ptr != NULL) {
+    if (compare(&ptr->data, x) == 0) { /* キー値が一致 */
+      list->crnt = ptr;
+      return ptr;
+    }
+    ptr = ptr->next;
+  }
+  return NULL;
+}
+
+/* 先頭にノードを挿入 */
+void InsertFront(List *list, const Member *x)
+{
+  Node *ptr = list->
+}
