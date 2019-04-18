@@ -131,3 +131,24 @@ void PrintLnCurrent(const List *List)
   PrintCurrent(list);
   putchar('\n');
 }
+
+/* 全ノードのデータをリスト順に表示 */
+void Print(const List *list)
+{
+  if (list->head == NULL)
+    printf("ノードがありません。");/* 先頭から入れていく設計 */
+  else {
+    Node *ptr = list->head;
+    puts("【一覧表】");
+    while (ptr != NULL) {
+      PrintLnMember(&ptr->data);
+      ptr = ptr->next;
+    }
+  }
+}
+
+/* 線形リスとの後始末 */
+void Terminate(List *list)
+{
+  Clear(list);
+}
