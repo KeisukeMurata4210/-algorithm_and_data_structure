@@ -78,12 +78,56 @@ void RemoveRear(List *list)
     if ((list->head)->next == NULL) /* ノードが一つだけなら先頭を削除 */
       RemoveFront(list);
     else {
-      Node *ptr = list->head;
-      Node *pre;
-      while (ptr->next != NULL) {
+      Node *ptr = list->head;/* 末尾ノード（現在のノードが指す、後続ノード） */
+      Node *pre;             /* 末尾から2番目のノード（現在のノード） */
+      while (ptr->next != NULL) {/* 後ろが無い、ってなったら終了 */
         pre = ptr;
         ptr = ptr->next;
       }
+      pre->next = NULL;/* 末尾を削除するから、2番目ノードの後続ポインタはNULL */
+      free(ptr);  /* 削除＝解放 */
+      list->crnt = pre;/* 新しい末尾を現在のノードにする */
     }
   }
+}
+
+/* 着目ノードを削除 */
+void RemoveCurrent(List *list)
+{
+  if (list->head != NULL) {
+    if (list->crnt == list->head)/* 先頭に着目していれば */
+      RemoveFront(list); /* 先頭を削除 */
+    else {
+      Node *ptr = list->head;
+      while (ptr->next != list->crnt) /* 先頭から順番に、「今」のノードを探していく */
+        ptr = ptr->next;/* ループが終わった時点で、ptrはcrntの一つ前のノードを指している */
+      ptr->next = list->crnt->next;/* だから、ptrの後続ノードとして、削除するcrntの後続ノードを代入する */
+      free(list->crnt);
+      list->crnt = ptr;/* 削除した一つ前を今のノードにする */
+    }
+  }
+}
+
+/* 全ノードを削除 */
+void Clear(List *list)
+{
+  while (list->head != NULL)/* 一番後ろを現在として渡さないと全部消しきれないのかな */
+    RemoveFront(list);
+  list->crnt = NULL;
+}
+
+/* 着目ノードのデータを表示 */
+void PrintCurrent(const List *List)
+{
+  if (list->crnt == NULL)
+    printf("着目ノードはありません。")
+  else
+    PrintMember(&list->crnt->data);
+}
+
+/* 着目ノードのデータを表示（改行付き） */
+void PrintLnCurrent(const List *List)
+{
+  PrintCurrent(list);
+  putchar('\n');
 }
