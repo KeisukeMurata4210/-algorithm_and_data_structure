@@ -40,11 +40,14 @@ int main(void)
   do {
     Member x;
     switch (menu = SelectMenu()){
-      case /* constant-expression */:
-        /* code */
+      /* 先頭にノードを挿入 */
+      case INS_FRONT:
+        x = ScanMember("先頭に挿入");
+        InsertFront(&list, &x);
         break;
-    
-      default:
+      /* 末尾にノードを挿入 */
+      case INS_REAR:
+        x = ScanMember("末尾に挿入", MEMBER_NO | MEMBER_NAME);
         break;
     }
   }

@@ -33,6 +33,6 @@ Member ScanMember(const char *message, int sw)
   Member temp;
   printf("%sするデータを入力してください\n", message);
   if (sw & MEMBER_NO)   { printf("番号："); scanf("%d", &temp.no);  }
-  if (sw & MEMBER_NAME) { printf("番号："); scanf("%d", &temp.name);}
+  if (sw & MEMBER_NAME) { printf("名前："); scanf("%s", &temp.name);}
   return temp;
 }
