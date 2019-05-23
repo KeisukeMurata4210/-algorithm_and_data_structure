@@ -27,7 +27,7 @@ Menu SelectMenu(void)
     }
     printf("（ 0）終了　：");
     scanf("%d", &ch);
-  } while (ch < TERMINATE || ch > CLEAR)
+  } while (ch < TERMINATE || ch > CLEAR);
   return (Menu)ch;
 }
 
@@ -87,9 +87,11 @@ int main(void)
         Print(&list);
         break;
       /* 全ノードを削除 */
-        case CLEAR:
-          Clear(&list);
-          break;
+      case CLEAR:
+        Clear(&list);
+        break;
+      default:
+        break;
     }
   } while (menu != TERMINATE);
   Terminate(&list);
