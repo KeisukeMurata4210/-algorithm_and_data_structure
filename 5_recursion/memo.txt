@@ -1,0 +1,65 @@
+<3_recur.c>
+引数に5を受け取った場合
+recur(4)
+5を出力
+recur(3)
+
+①
+・recur(4)
+recur(3)
+4を出力
+recur(2)
+
+②
+・recur(3)
+recur(2)
+3を出力
+recur(1)
+
+③
+・recur(2)
+recur(1)
+2を出力
+recur(0)
+
+④
+・recur(1)
+recur(0)
+1を出力
+recur(-1)
+
+1
+2
+3
+1
+4
+1
+2
+5
+1
+2
+3
+1
+この思考が「トップダウン解析」
+
+・recur(1)
+recur(0)
+1を出力
+recur(-1)
+=1を出力
+
+・recur(2)
+recur(1)
+2を出力
+recur(0)
+=1,2を出力
+下から上に辿っていくと
+
+recur(-1) 
+recur(0)
+recur(1) 1
+recur(2) 12
+recur(3) 1231
+recur(4) 1231412
+recur(5) 123141251231
+行ったり戻ったりしなくていい分、ボトムアップ解析の方が効率いいな
