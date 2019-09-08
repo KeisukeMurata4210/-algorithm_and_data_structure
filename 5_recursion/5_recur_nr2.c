@@ -18,6 +18,14 @@ Top:
     n = n - 2;
     goto Top;
   }
+
+  if (!IsEmpty(&stk)) {
+    Pop(&stk, &n);
+    printf("%d\n", n);
+    n = n - 2;
+    goto Top;
+  }
+  Terminate(&stk);
 }
 
 int main(void)
