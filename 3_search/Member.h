@@ -9,7 +9,7 @@ typedef struct {
 } Member;
 
 #define MEMBER_NO   1/* 番号を表す定数値 */
-#define MEMBER_NAME 2/* 使命を表す定数値 */
+#define MEMBER_NAME 2/* 氏名を表す定数値 */
 
 /* 会員の番号の比較関数 */
 int MemberNoCmp(const Member *x, const Memeber *y);
