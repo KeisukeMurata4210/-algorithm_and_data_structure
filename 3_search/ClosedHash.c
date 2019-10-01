@@ -76,14 +76,45 @@ int Add(ClosedHash *h, const Member *x)
 /* データの削除 */
 int Remove(ClosedHash *h, const Member *x)
 {
-  
+  Bucket *p = Search(h, x);
+  if (p == NULL)
+    return 1; /* そのキー値は存在しない */
+  p->stat = Deleted; /* そうか。Deletedにすれば次に上書きできるという合図だから、値はいじらなくても事足りるんだ。 */
+  return 0;
 }
 
 /* ハッシュ表をダンプ */
-void Dump(const ClosedHash *h);
+void Dump(const ClosedHash *h)
+{
+  int i;
+  for (i = 0; i < h->size; i++) {
+    printf("%02d : ", i);
+    switch (h->table[i].stat) { /* 状態を一個ずつ調べていきます */
+      case Occupied:
+        printf("%d（%s）\n", h->table[i].data.no, h->table[i].data.name);
+        break;
+      case Empty:
+        printf("--未登録--\n");
+        break;
+      case Deleted:
+        printf("--削除ずみ--\n");
+        break;
+    }
+  }
+}
 
 /* 全データの削除 */
-void Clear(ClosedHash *h);
+void Clear(ClosedHash *h)
+{
+  int i;
+  for (i = 0; i < h->size; i++)
+    h->table[i].stat = Empty; /* これも同じく、データ自体は変えなくてもstatusを変えれば事足りる */
+}
 
 /* ハッシュ表を後始末 */
-void Terminate(ClosedHash *h);
+void Terminate(ClosedHash *h)
+{
+  Clear(h);/* 全データを削除 */
+  free(h->table);/* ハッシュ表用配列の記憶域を解放 */
+  h->size = 0; /* ハッシュ表の容量をクリア */
+}
