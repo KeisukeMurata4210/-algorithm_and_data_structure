@@ -6,16 +6,15 @@
 void shell(int a[], int n)
 {
   int i, j, h;
-  for (h = n / 2; h > 0; h /= 2) {/* すごい。ループの条件にソートする間隔を使う */
-    printf("h:%d\n", h);
-     for (i = h; i < n; i++) {
-      printf(" i:%d\n", i);
+  for (h = 1; h < n / 9; h = h * 3 + 1)
+    ;
+  for ( ; h > 0; h /= 3)
+    for (i = h; i < n; i++) {
       int tmp = a[i];
-      for (j = i - h; j >= 0 && a[j] > tmp ; j -= h)
+      for (j = i - h; j >= 0 && a[j] > tmp; j -= h)
         a[j + h] = a[j];
-      a[j + h] = tmp;
+      a[j + h] = tmp; /* j -= hを実行した結果、継続条件を満たさない（tmpよりa[j]が小さい）状態になったらそこでループ終了　＝　tmpを入れる末尾は一つ戻ったa[j + h]になる */
     }
-  }
 }
 
 int main(void)
